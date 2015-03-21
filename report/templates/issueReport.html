@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue Report</title>
+    <link rel="stylesheet" href="assets/octicons/octicons.css">
+</head>
+<body>
+
+<h1>GitHub Worklog</h1>
+<p>Issue Event export: {{currentTime}}</p>
+
+<table >
+{{#issueEvents}}
+    <tr>
+        <td rowspan="4"><a href="{{issueUrl}}" target="_blank">#{{issueNr}}</a></td>
+        <td>{{dateTime}}</td>
+        <td>{{loginName}}</td>
+    </tr>
+    <tr>
+        <td colspan="2">{{#milestone}}milestone: {{{milestone}}} {{/milestone}}
+            {{#labels}} <span style="background-color:#{{color}};">{{{name}}}</span>  {{/labels}}
+            </td>
+    </tr>
+    <tr>
+        <td colspan="2"><span class="octicon octicon-{{issueEventType.icon}}"></span> {{issueTitle}}</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="border-bottom: 1px solid black">{{actionBody}}</td>
+    </tr>
+{{/issueEvents}}
+
+</table>
+
+</body>
+</html>
