@@ -1,0 +1,13 @@
+GitHub Worklog
+==============
+
+Export DateTime {{currentTime}}
+
+{{#issueEvents}}
+#{{issueNr}} / {{dateTime}} / {{loginName}}
+title: {{{issueTitleEscaped}}}
+body: {{{actionBodyEscaped}}}
+----------------------------------------------------------------------------
+{{/issueEvents}}
+
+
