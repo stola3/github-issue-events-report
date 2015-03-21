@@ -5,6 +5,7 @@ Export DateTime {{currentTime}}
 
 {{#issueEvents}}
 #{{issueNr}} / {{dateTime}} / {{loginName}} / {{issueEventType.actionText}}
+{{#milestone}}milestone: {{{milestone}}} / {{/milestone}}
 title: {{{issueTitleEscaped}}}
 body: {{{actionBodyEscaped}}}
 ----------------------------------------------------------------------------

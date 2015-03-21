@@ -1,5 +1,8 @@
 package ch.stola3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by stola3 on 20.03.15.
  */
@@ -19,8 +22,6 @@ public class IssuePojo {
 
         escaped = escaped.replace("#", "\\#");
         escaped = escaped.replace("_", "\\_");
-        //escaped = escaped.replace("?", "\\?");
-
 
         return escaped;
     }
@@ -55,7 +56,6 @@ public class IssuePojo {
         }
     }
 
-
     public IssuePojo(EventType eventType) {
         this.eventType = eventType;
     }
@@ -74,6 +74,9 @@ public class IssuePojo {
 
     private String actionBody;
 
+    private List<String> labels = new ArrayList<>();
+
+    private String milestone;
 
     public String getLoginName() {
         return loginName;
@@ -138,4 +141,17 @@ public class IssuePojo {
     public void setActionBody(String actionBody) {
         this.actionBody = actionBody;
     }
+
+    public List<String> getLabels() {
+        return labels;
+    }
+
+    public String getMilestone() {
+        return milestone;
+    }
+
+    public void setMilestone(String milestone) {
+        this.milestone = milestone;
+    }
+
 }

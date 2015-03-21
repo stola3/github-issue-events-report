@@ -1,5 +1,7 @@
 package ch.stola3;
 
+import org.eclipse.egit.github.core.Issue;
+import org.eclipse.egit.github.core.Label;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.PageIterator;
@@ -14,6 +16,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by stola3 on 21.03.15.
@@ -84,7 +87,7 @@ public class IssueEventCollector {
                 // fill generic information
                 IssuePojo ie = new IssuePojo(eventType);
                 ie.setLoginName(event.getActor().getLogin());
-                ie.setDateTime(simpleDateFormat.format(event.getCreatedAt())); //TODO format?!?
+                ie.setDateTime(simpleDateFormat.format(event.getCreatedAt()));
 
                 switch (eventType) {
                     case IssueCommentEvent:
@@ -110,8 +113,7 @@ public class IssueEventCollector {
         IssuesPayload issuesPayload = (IssuesPayload) eventPayload;
 
 
-        issuePojo.setIssueNr(issuesPayload.getIssue().getNumber());
-        issuePojo.setIssueTitle(issuesPayload.getIssue().getTitle());
+        issuePojo = extractIssueFields(issuesPayload.getIssue(), issuePojo);
 
         if(issuesPayload.getIssue().getBody() != null ) {
             issuePojo.setActionBody(issuesPayload.getIssue().getBody());
@@ -137,12 +139,10 @@ public class IssueEventCollector {
     }
 
 
-    //TODO use generics for .getIssue()
     private IssuePojo  handleIssueCommentEvent(IssuePojo issuePojo, EventPayload eventPayload){
         IssueCommentPayload issueCommentPayload  = (IssueCommentPayload) eventPayload;
 
-        issuePojo.setIssueNr(issueCommentPayload.getIssue().getNumber());
-        issuePojo.setIssueTitle(issueCommentPayload.getIssue().getTitle());
+        issuePojo = extractIssueFields(issueCommentPayload.getIssue(), issuePojo);
 
         if(issueCommentPayload.getComment().getBody() != null ) {
             issuePojo.setActionBody(issueCommentPayload.getComment().getBody());
@@ -162,4 +162,18 @@ public class IssueEventCollector {
         return issuePojo;
     }
 
+    private IssuePojo extractIssueFields(Issue issue, IssuePojo issuePojo){
+        issuePojo.setIssueNr(issue.getNumber());
+        issuePojo.setIssueTitle(issue.getTitle());
+
+        if(issue.getMilestone() != null && issue.getMilestone().getTitle() != null){
+            issuePojo.setMilestone(issue.getMilestone().getTitle());
+        }
+
+        if(issue.getLabels() != null ) {
+            issue.getLabels().forEach((Label label) -> issuePojo.getLabels().add(label.getName()));
+        }
+
+        return issuePojo;
+    }
 }
