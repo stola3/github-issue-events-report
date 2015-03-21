@@ -1,0 +1,5 @@
+# unignore all templates
+!template/*
+
+# ignore the generated Reports
+/issueReport*
