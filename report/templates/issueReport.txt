@@ -4,7 +4,7 @@ GitHub Worklog
 Export DateTime {{currentTime}}
 
 {{#issueEvents}}
-#{{issueNr}} / {{dateTime}} / {{loginName}}
+#{{issueNr}} / {{dateTime}} / {{loginName}} / {{issueEventType.actionText}}
 title: {{{issueTitleEscaped}}}
 body: {{{actionBodyEscaped}}}
 ----------------------------------------------------------------------------

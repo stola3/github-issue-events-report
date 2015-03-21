@@ -20,8 +20,6 @@ import java.util.Collection;
  */
 public class IssueEventCollector {
 
-
-
     private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 
     private GitHubClient gitHubClient;
@@ -125,6 +123,9 @@ public class IssueEventCollector {
                 issuePojo.setIssueEventType(IssuePojo.IssueEventType.ISSUE_OPEN);
                 break;
 
+            case "closed":
+                issuePojo.setIssueEventType(IssuePojo.IssueEventType.ISSUE_CLOSE);
+                break;
             default:
                 System.out.println(" !!! UNKNOWN : " + issuesPayload.getAction() + " Nr: " + issuesPayload.getIssue().getNumber());
                 issuePojo.setIssueEventType(IssuePojo.IssueEventType.UNKNOWN);
@@ -160,4 +161,5 @@ public class IssueEventCollector {
 
         return issuePojo;
     }
+
 }
