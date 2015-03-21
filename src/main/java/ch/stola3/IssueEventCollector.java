@@ -171,7 +171,7 @@ public class IssueEventCollector {
         }
 
         if(issue.getLabels() != null ) {
-            issue.getLabels().forEach((Label label) -> issuePojo.getLabels().add(label.getName()));
+            issue.getLabels().forEach((Label label) -> issuePojo.getLabels().add(new IssuePojo.Label(label.getName(), label.getColor())));
         }
 
         return issuePojo;

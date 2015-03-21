@@ -60,6 +60,32 @@ public class IssuePojo {
         this.eventType = eventType;
     }
 
+    public static class Label{
+        private String name;
+        private String color;
+
+        public Label(String name, String color){
+            this.name = name;
+            this.color = color;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getColor() {
+            return color;
+        }
+
+        public void setColor(String color) {
+            this.color = color;
+        }
+    }
+
     private String loginName;
 
     private String dateTime;
@@ -74,7 +100,7 @@ public class IssuePojo {
 
     private String actionBody;
 
-    private List<String> labels = new ArrayList<>();
+    private List<Label> labels = new ArrayList<>();
 
     private String milestone;
 
@@ -142,7 +168,7 @@ public class IssuePojo {
         this.actionBody = actionBody;
     }
 
-    public List<String> getLabels() {
+    public List<Label> getLabels() {
         return labels;
     }
 
