@@ -15,7 +15,7 @@ public class IssuePojo {
      * @return escaped String
      */
     private String doEscape(String escapeMe) {
-        if(escapeMe == null) {
+        if (escapeMe == null) {
             return null;
         }
         String escaped = escapeMe;
@@ -33,10 +33,9 @@ public class IssuePojo {
 
     public enum IssueEventType {
         ISSUE_OPEN("open issue", "issue-opened"),
-        ISSUE_CLOSE("closed issue" , "issue-closed"),
+        ISSUE_CLOSE("closed issue", "issue-closed"),
         ISSUE_COMMENTED("issue commented", "comment"),
-        UNKNOWN("not jet implemented" , "question")
-        ;
+        UNKNOWN("not jet implemented", "question");
 
         private String actionText;
 
@@ -60,11 +59,11 @@ public class IssuePojo {
         this.eventType = eventType;
     }
 
-    public static class Label{
+    public static class Label {
         private String name;
         private String color;
 
-        public Label(String name, String color){
+        public Label(String name, String color) {
             this.name = name;
             this.color = color;
         }
@@ -95,6 +94,8 @@ public class IssuePojo {
     private IssueEventType issueEventType;
 
     private int issueNr;
+
+    private String issueUrl;
 
     private String issueTitle;
 
@@ -180,4 +181,11 @@ public class IssuePojo {
         this.milestone = milestone;
     }
 
+    public String getIssueUrl() {
+        return issueUrl;
+    }
+
+    public void setIssueUrl(String issueUrl) {
+        this.issueUrl = issueUrl;
+    }
 }

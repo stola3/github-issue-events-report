@@ -1,7 +1,9 @@
 GitHub Worklog
 ==============
 
-Export DateTime {{currentTime}}
+Following {{countIssueEvent}} IssueEvents were exported at {{currentTime}} from GitHub Repo {{repoOwner}}/{{repoName}}.
+
+* OnLine: https://github.com/{{repoOwner}}/{{repoName}}/issues
 
 {{#issueEvents}}
 #{{issueNr}} / {{dateTime}} / {{loginName}} / {{issueEventType.actionText}}
@@ -10,5 +12,3 @@ title: {{{issueTitleEscaped}}}
 {{#actionBodyEscaped}}body: {{{actionBodyEscaped}}}{{/actionBodyEscaped}}
 ----------------------------------------------------------------------------
 {{/issueEvents}}
-
-

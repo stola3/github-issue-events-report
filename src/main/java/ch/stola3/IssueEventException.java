@@ -1,9 +1,9 @@
 package ch.stola3;
 
 /**
- * Created by ast on 21.03.15.
+ * Created by stola3 on 21.03.15.
  */
-public class IssueEventException extends  Exception{
+public class IssueEventException extends Exception {
 
     public IssueEventException() {
         super();

@@ -31,13 +31,13 @@ public class IssueEventCollector {
     private Repository repo;
     private EventService eventService;
 
-    public IssueEventCollector(String repoOwner, String repoName) throws  IssueEventException{
+    public IssueEventCollector(String repoOwner, String repoName) throws IssueEventException {
         this(repoOwner, repoName, null);
     }
 
-    public IssueEventCollector(String repoOwner, String repoName, String token) throws  IssueEventException{
+    public IssueEventCollector(String repoOwner, String repoName, String token) throws IssueEventException {
         gitHubClient = new GitHubClient();
-        if(token != null) {
+        if (token != null) {
             gitHubClient.setOAuth2Token(token);
         }
 
@@ -54,7 +54,7 @@ public class IssueEventCollector {
         ArrayList<IssuePojo> issueEvents = new ArrayList<IssuePojo>();
 
         int nextPage = 0;
-        while(nextPage >= 0) {
+        while (nextPage >= 0) {
             PageIterator<Event> eventIter = eventService.pageEvents(repo, nextPage, 30);
             nextPage = eventIter.getNextPage();
 
@@ -75,7 +75,7 @@ public class IssueEventCollector {
                 IssuePojo.EventType eventType;
                 try {
                     eventType = IssuePojo.EventType.valueOf(event.getType());
-                } catch (IllegalArgumentException iae ) {
+                } catch (IllegalArgumentException iae) {
                     eventType = IssuePojo.EventType.UNHANDELD;
                     continue; // continue loop!
 
@@ -109,13 +109,13 @@ public class IssueEventCollector {
     }
 
 
-    private IssuePojo  handleIssueEvent(IssuePojo issuePojo, EventPayload eventPayload){
+    private IssuePojo handleIssueEvent(IssuePojo issuePojo, EventPayload eventPayload) {
         IssuesPayload issuesPayload = (IssuesPayload) eventPayload;
 
 
         issuePojo = extractIssueFields(issuesPayload.getIssue(), issuePojo);
 
-        if(issuesPayload.getIssue().getBody() != null ) {
+        if (issuesPayload.getIssue().getBody() != null) {
             issuePojo.setActionBody(issuesPayload.getIssue().getBody());
         }
 
@@ -139,12 +139,12 @@ public class IssueEventCollector {
     }
 
 
-    private IssuePojo  handleIssueCommentEvent(IssuePojo issuePojo, EventPayload eventPayload){
-        IssueCommentPayload issueCommentPayload  = (IssueCommentPayload) eventPayload;
+    private IssuePojo handleIssueCommentEvent(IssuePojo issuePojo, EventPayload eventPayload) {
+        IssueCommentPayload issueCommentPayload = (IssueCommentPayload) eventPayload;
 
         issuePojo = extractIssueFields(issueCommentPayload.getIssue(), issuePojo);
 
-        if(issueCommentPayload.getComment().getBody() != null ) {
+        if (issueCommentPayload.getComment().getBody() != null) {
             issuePojo.setActionBody(issueCommentPayload.getComment().getBody());
         }
 
@@ -162,15 +162,16 @@ public class IssueEventCollector {
         return issuePojo;
     }
 
-    private IssuePojo extractIssueFields(Issue issue, IssuePojo issuePojo){
+    private IssuePojo extractIssueFields(Issue issue, IssuePojo issuePojo) {
         issuePojo.setIssueNr(issue.getNumber());
         issuePojo.setIssueTitle(issue.getTitle());
+        issuePojo.setIssueUrl(issue.getHtmlUrl());
 
-        if(issue.getMilestone() != null && issue.getMilestone().getTitle() != null){
+        if (issue.getMilestone() != null && issue.getMilestone().getTitle() != null) {
             issuePojo.setMilestone(issue.getMilestone().getTitle());
         }
 
-        if(issue.getLabels() != null ) {
+        if (issue.getLabels() != null) {
             issue.getLabels().forEach((Label label) -> issuePojo.getLabels().add(new IssuePojo.Label(label.getName(), label.getColor())));
         }
 

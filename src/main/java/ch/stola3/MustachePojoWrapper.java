@@ -13,6 +13,10 @@ public class MustachePojoWrapper {
 
     public String currentTime;
 
+    public String repoOwner;
+
+    public String repoName;
+
     public MustachePojoWrapper(List<IssuePojo> issueEvents) {
         this.issueEvents = issueEvents;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
@@ -23,5 +27,20 @@ public class MustachePojoWrapper {
         return issueEvents;
     }
 
+    public int countIssueEvent() {
+        if (issueEvents == null) {
+            return 0;
+        } else {
+            return issueEvents.size();
+        }
+    }
+
+    /**
+     * @return
+     */
+    public IssuePojo.IssueEventType[] getIssueEventLegend() {
+
+        return IssuePojo.IssueEventType.values();
+    }
 
 }
