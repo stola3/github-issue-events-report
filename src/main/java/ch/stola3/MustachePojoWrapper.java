@@ -58,7 +58,7 @@ public class MustachePojoWrapper {
     /**
      * @return
      */
-    public IssuePojo.IssueEventType[] getIssueEventLegend() {
+    public IssuePojo.IssueEventType[] getIssueEventKeyOverview() {
 
         return IssuePojo.IssueEventType.values();
     }
