@@ -2,6 +2,8 @@ package ch.stola3;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,8 +25,26 @@ public class MustachePojoWrapper {
         currentTime = LocalDateTime.now().format(formatter).toString();
     }
 
+    /**
+     * Get all IssueEvents.<br>
+     * <b>Order: newest top!</b>
+     *
+     * @return List<IssuePojo>
+     */
     public List<IssuePojo> issueEvents() {
         return issueEvents;
+    }
+
+    /**
+     * Get all IssueEvents.<br>
+     * <b>Order: oldest entry top, newest bottom!</b>
+     *
+     * @return List<IssuePojo>
+     */
+    public List<IssuePojo> issueEventsReverse() {
+        List<IssuePojo> reverse = new ArrayList<IssuePojo>(issueEvents);
+        Collections.reverse(reverse);
+        return reverse;
     }
 
     public int countIssueEvent() {
