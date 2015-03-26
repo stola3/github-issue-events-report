@@ -2,7 +2,7 @@
 
 Goal: Export issue events to a report.
 
-
+HINT: Works great in combination with: https://github.com/synox/BFH-Latex_Bericht_Template_Markdown
 
 ## Usage
 `java -jar github-issue-events-report-0.1-jar-with-dependencies.jar`
